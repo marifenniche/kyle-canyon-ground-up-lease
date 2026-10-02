@@ -346,27 +346,15 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.6;stroke
 .trio>div.hot .v{color:var(--burg)}
 .stats{gap:calc(var(--u)*.8)}
 
-/* ===== v5: audience versions (one URL, #brokers / #drive-thru / #banks-medical) ===== */
+/* ===== v6: audience versions at unique URLs: /brokers /drive-thru /banks /medical ===== */
 [hidden]{display:none!important}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .headline{font-size:calc(var(--u)*3.3)}
 .proof .n.tx{font-size:calc(var(--u)*2.05);letter-spacing:-.01em;padding:calc(var(--u)*.4) 0}
-.vin{animation:vfade .55s var(--ease) both}
-@keyframes vfade{from{opacity:0}to{opacity:1}}
 
 /* toolbar: in-flow sticky bar so it never covers a page */
 .toolbar{position:sticky;top:max(10px,1.2vw);right:auto;width:min(100%,1632px);margin:0 auto calc(1.4vw + 6px);
   display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:10px;pointer-events:none;z-index:6}
 .toolbar>*{pointer-events:auto}
-.vswitch{display:inline-flex;align-items:center;gap:2px;padding:4px;border-radius:999px;
-  background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.9);box-shadow:0 6px 24px -8px rgba(22,35,62,.35)}
-.toolbar .vswitch button{font:500 13px/1 var(--body);letter-spacing:.02em;color:var(--ink2);cursor:pointer;
-  background:transparent;border:1px solid transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;
-  padding:9px 14px;border-radius:999px;white-space:nowrap;transition:background .5s var(--ease),border-color .5s var(--ease),color .5s var(--ease)}
-.toolbar .vswitch button:hover{background:rgba(255,255,255,.85);color:var(--navy)}
-.toolbar .vswitch button[aria-checked="true"]{background:var(--gold-wash);border-color:var(--gold-line);color:var(--burg);font-weight:600}
-.toolbar .vswitch button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* footer CTA: two-line pill (CTA text over address) */
 .contact .mail{display:inline-flex;align-items:center;padding:calc(var(--u)*.45) calc(var(--u)*1.3)}
@@ -379,7 +367,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.6;stroke
 
 /* page 1: version blocks keep the existing panel rhythm */
 .hero .panel .specs.key .row{padding-top:calc(var(--u)*.42);padding-bottom:calc(var(--u)*.42)}
-@media print{.toolbar,.vswitch,.sr{display:none!important}.vin{animation:none!important}}
+@media print{.toolbar{display:none!important}}
 
 /* ===== v5 rev 2: address, parking ===== */
 .addr{position:relative;align-items:center;gap:calc(var(--u)*.6);font-family:var(--body);font-weight:600;color:var(--navy);
@@ -404,15 +392,9 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.6;stroke
 <body>
 
 <div class="toolbar">
-  <div class="vswitch" role="radiogroup" aria-label="Brochure version">
-    <button type="button" role="radio" aria-checked="true" tabindex="0" data-version="brokers">Brokers</button>
-    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-version="drive-thru">Drive-Thru</button>
-    <button type="button" role="radio" aria-checked="false" tabindex="-1" data-version="banks-medical">Banks &amp; Medical</button>
-  </div>
   <button type="button" class="pdfbtn" onclick="window.print()" aria-label="Save as PDF"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3" />
   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
   <path d="m7 10 5 5 5-5" /></svg>Save as PDF</button>
-  <div class="sr" id="vlive" role="status" aria-live="polite"></div>
 </div>
 
 <!-- =============== PAGE 1: INTRODUCTION =============== -->
@@ -421,7 +403,8 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.6;stroke
   <header class="hd lead">
     <h2 class="headline" data-v="brokers">Ground Lease Available: <em>&plusmn;2.28 Acres at Kyle Canyon</em></h2>
     <h2 class="headline" data-v="drive-thru" hidden>18,700 Cars a Day on US-95. <em>3,000+ Homes Nearby.</em></h2>
-    <h2 class="headline" data-v="banks-medical" hidden><em>$160,372</em> Average Household Income Within One Mile</h2>
+    <h2 class="headline" data-v="banks" hidden><em>$160,372</em> Average Household Income Within One Mile</h2>
+    <h2 class="headline" data-v="medical" hidden><em>57,754 People</em> Within 3 Miles</h2>
     <div class="subrow">
       <h1>Kyle Canyon Commercial Ground Lease</h1>
       <div class="addr"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
@@ -429,7 +412,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.6;stroke
     </div>
   </header>
 
-  <div class="proof" role="list" data-v="brokers drive-thru banks-medical">
+  <div class="proof" role="list">
     <div class="pt glass lift acc" role="listitem"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H5a2 2 0 0 0-2 2v3" /><path d="M21 8V5a2 2 0 0 0-2-2h-3" /><path d="M3 16v3a2 2 0 0 0 2 2h3" /><path d="M16 21h3a2 2 0 0 0 2-2v-3" /></svg><div><div class="n">&plusmn;2.28<small>AC</small></div><div class="l">99,317 SF available</div></div></div>
     <div class="pt glass lift acc" role="listitem"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1" /><rect width="7" height="7" x="14" y="3" rx="1" /><rect width="7" height="7" x="14" y="14" rx="1" /><rect width="7" height="7" x="3" y="14" rx="1" /></svg><div><div class="n tx">CN Zoning</div><div class="l">Commercial Neighborhood</div></div></div>
     <div class="pt glass lift acc" role="listitem"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" /><path d="M14 2v4a2 2 0 0 0 2 2h4" /><path d="M10 9H8" /><path d="M16 13H8" /><path d="M16 17H8" /></svg><div><div class="n tx">Ground Lease</div><div class="l">Site can be divided</div></div></div>
@@ -442,7 +425,7 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.6;stroke
   <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg><div><b>3,000+ Homes</b><span>in surrounding communities</span></div></div>
     </figure>
 
-    <aside class="panel glass" data-v="brokers drive-thru banks-medical">
+    <aside class="panel glass">
       <div class="scarce"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg><span>Limited retail corners along Kyle Canyon</span></div>
       <dl class="specs key">
         <div class="row"><dt>Available Area</dt><dd class="big">&plusmn;2.28 Acres <small>(99,317 SF)</small></dd></div>
@@ -637,41 +620,18 @@ svg.i{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:1.6;stroke
 <script>
 (function(){
   var V={
-    'brokers':{label:'Brokers',cta:'Send me your client\u2019s criteria',subject:'Client criteria \u2013 Oso Blanca / Kyle Canyon ground lease'},
-    'drive-thru':{label:'Drive-Thru',cta:'Request the site package',subject:'Site package request \u2013 Oso Blanca / Kyle Canyon'},
-    'banks-medical':{label:'Banks & Medical',cta:'Request the site package',subject:'Site package request \u2013 Oso Blanca / Kyle Canyon'}
+    'brokers':{cta:'Send me your client\u2019s criteria',subject:'Client criteria \u2013 Oso Blanca / Kyle Canyon ground lease'},
+    'drive-thru':{cta:'Request the site package',subject:'Site package request \u2013 Oso Blanca / Kyle Canyon'},
+    'banks':{cta:'Request the site package',subject:'Site package request \u2013 Bank \u2013 Oso Blanca / Kyle Canyon'},
+    'medical':{cta:'Request the site package',subject:'Site package request \u2013 Medical \u2013 Oso Blanca / Kyle Canyon'}
   };
-  var order=['brokers','drive-thru','banks-medical'];
-  var radios=[].slice.call(document.querySelectorAll('.vswitch [role="radio"]'));
-  var live=document.getElementById('vlive');
-  var started=false;
-  function fromHash(){var k=(location.hash||'').replace(/^#/,'');return V.hasOwnProperty(k)?k:'brokers'}
-  function apply(k,announce){
-    [].forEach.call(document.querySelectorAll('[data-v]'),function(el){
-      var on=el.getAttribute('data-v').split(' ').indexOf(k)>-1;
-      var was=!el.hidden;
-      el.hidden=!on;
-      if(on&&!was&&started){el.classList.remove('vin');void el.offsetWidth;el.classList.add('vin')}
-    });
-    radios.forEach(function(r){var on=r.getAttribute('data-version')===k;r.setAttribute('aria-checked',on?'true':'false');r.tabIndex=on?0:-1});
-    var href='mailto:ghassan05@gmail.com?subject='+encodeURIComponent(V[k].subject);
-    [].forEach.call(document.querySelectorAll('[data-cta]'),function(a){a.setAttribute('href',href);a.querySelector('.cta-t').textContent=V[k].cta});
-    if(announce&&live)live.textContent='Showing '+V[k].label+' version';
-    started=true;
-  }
-  function go(k){if(location.hash==='#'+k){apply(k,true)}else{location.hash=k}}
-  radios.forEach(function(r){r.addEventListener('click',function(){go(r.getAttribute('data-version'))})});
-  var group=document.querySelector('.vswitch');
-  group.addEventListener('keydown',function(e){
-    var i=order.indexOf(fromHash()),n=-1;
-    if(e.key==='ArrowRight'||e.key==='ArrowDown')n=(i+1)%3;
-    else if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=(i+2)%3;
-    else if(e.key==='Home')n=0;else if(e.key==='End')n=2;
-    if(n<0)return;
-    e.preventDefault();go(order[n]);radios[n].focus();
+  var k=location.pathname.replace(/\/+$/,'').split('/').pop();
+  if(!V[k])k='brokers';
+  [].forEach.call(document.querySelectorAll('[data-v]'),function(el){
+    el.hidden=el.getAttribute('data-v').split(' ').indexOf(k)<0;
   });
-  window.addEventListener('hashchange',function(){apply(fromHash(),true)});
-  apply(fromHash(),false);
+  var href='mailto:ghassan05@gmail.com?subject='+encodeURIComponent(V[k].subject);
+  [].forEach.call(document.querySelectorAll('[data-cta]'),function(a){a.setAttribute('href',href);a.querySelector('.cta-t').textContent=V[k].cta});
 })();
 </script>
 <script>
